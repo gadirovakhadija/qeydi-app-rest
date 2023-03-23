@@ -6,9 +6,7 @@ import org.example.entity.User;
 import org.example.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +34,45 @@ public class UserRestController {
         return ResponseEntity.ok(ResponseDTO.of(userDTOS));
     }
 
+@GetMapping("/users/{id}")
+    public ResponseEntity<ResponseDTO> getUser(
+            @PathVariable("id") int id
+    ){
+        User u = userService.findById(id);
+        return ResponseEntity.ok(ResponseDTO.of(u));
+
+    }
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<ResponseDTO> deleteUser(
+            @PathVariable("id") int id
+    ) {
+        User user = userService.findById(id);
+        userService.deleteUserById(id);
+
+        return ResponseEntity.ok(ResponseDTO.of(new UserDTO(user),"Deleted Successfully"));
+    }
+
+    @PutMapping("/users")
+    public ResponseEntity<ResponseDTO> updateUser(
+            @RequestBody UserDTO userDto
+    ){
+        User user = new User();
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setAge(userDto.getAge());
+        user.setExperience(userDto.getExperience());
+        user.setUniversity(userDto.getUniversity());
+        user.setPoint(userDto.getPoint());
+        user.setCost(userDto.getCost());
+        user.setCode(userDto.getCode());
+        user.setSubjectId(userDto.getSubjectId());
+        user.setTeachwayId(userDto.getTeachwayId());
+        userService.updateUser(user);
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(user.getName());
+        userDTO.setSurname(user.getSurname());
+        return ResponseEntity.ok(ResponseDTO.of(userDTO,"Successfully updated"));
+    }
 
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <link rel="stylesheet" type="text/css" href="css/login.css" media="all"/>
+
+    <title>Sign in-up page</title>
+</head>
+<body>
+
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form action="sign-up" method="POST" modelAttribute="signupModel">
+            <h1>Create Account</h1>
+
+            <input type="text" placeholder="Name" path="name" name="name" required>
+            <input type="text" placeholder="Surame" path="surname" name="surname" required>
+            <input type="email" placeholder="Email" path="email" name="email" required>
+            <input type="password" placeholder="Password" path="password" name="password" required>
+            <button class="sign" name="login">Sign Up</button>
+        </form>
+    </div>
+
+    <div class="form-container sign-in-container">
+        <form action="sign-in" method="GET" modelAttribute="signinModel">
+            <h1>Sign in</h1>
+            <input type="email" placeholder="Email" path="email" name="email" required>
+            <input id="passwordId" type="password" placeholder="Password" path="password" name="password" required>
+            <input type="checkbox" onclick="passwordVisibility()">Show Password
+
+            <button class="sign">Sign In</button>
+        </form>
+    </div>
+
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Hello, User!</h1>
+                <p>Please enter your personal info !</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Welcome Back!</h1>
+                <p>We are happy to see you again</p>
+                <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="login.js"></script>
+</body>
+</html>
