@@ -21,14 +21,17 @@
     </div>
 
     <div class="form-container sign-in-container">
-        <form action="sign-in" method="GET" modelAttribute="signinModel">
+<!--        <form>-->
+        <div>
+<!--        <form action="sign-in" method="GET" modelAttribute="signinModel">-->
             <h1>Sign in</h1>
-            <input type="email" placeholder="Email" path="email" name="email" required>
+            <input id="emailId" type="email" placeholder="Email" path="email" name="email" required>
             <input id="passwordId" type="password" placeholder="Password" path="password" name="password" required>
             <input type="checkbox" onclick="passwordVisibility()">Show Password
 
-            <button class="sign">Sign In</button>
-        </form>
+            <button class="sign" onclick="getSignIn()">Sign In</button>
+        </div>
+<!--        </form>-->
     </div>
 
     <div class="overlay-container">
@@ -46,6 +49,6 @@
         </div>
     </div>
 </div>
-<script src="login.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>
