@@ -19,5 +19,18 @@ function getUsers() {
     // xhttp.send(JSON.stringify(user));
     // window.location = 'users.html';
 }
+function displayData(data) {
+    const tableBody = document.getElementById('table-body');
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        nameCell.textContent = item.name;
+        const descriptionCell = document.createElement('td');
+        descriptionCell.textContent = item.surname;
+        row.appendChild(nameCell);+
+        row.appendChild(descriptionCell);
+        tableBody.appendChild(row);
+    });
+}
 
 

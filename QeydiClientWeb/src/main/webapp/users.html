@@ -64,25 +64,25 @@
 
             </tr>
             </thead>
-            <tbody>
+            <tbody id="table-body">
 <!--            <tr th:each="item : ${items}" th:attr="onload=${'loadData(' + item.id + ')'}">-->
 <!--                <td th:text="${item.name}"></td>-->
 <!--                <td th:text="${item.age}"></td>-->
 <!--            </tr>-->
-                <tr th:each="u:${users}" th:attr="onload=${'getUsers()'}">
+                <tr th:each="u:${getUsers()}" onload="displayData(getUsers())">
 
-                    <td th:text="${list.name}"></td>
-                    <td th:text="${u.surname}"></td>
-                    <td th:text="${u.teachway.teachway}"></td>
-                    <td th:text="${u.subject}"></td>
-                    <td th:text="${u.cost}"></td>
+<!--                    <td th:text="${list.name}"></td>-->
+<!--                    <td th:text="${u.surname}"></td>-->
+<!--                    <td th:text="${u.teachway.teachway}"></td>-->
+<!--                    <td th:text="${u.subject}"></td>-->
+<!--                    <td th:text="${u.cost}"></td>-->
 
 <!--                    <td>${u.getName()}</td>-->
 <!--                    <td>${u.getSuranme()}</td>-->
 <!--                    <td>${u.getTeachway().getTeachway()}</td>-->
 <!--                    <td>${u.getSubject().getSubject()}</td>-->
 <!--                    <td>${u.getCost()}</td>-->
-                    <td><input type="button" id="gocv" value="More info" onclick="goCv('${u.email}')"></td>
+<!--                    <td><input type="button" id="gocv" value="More info" onclick="goCv('${u.email}')"></td>-->
                 </tr>
 
 <!--            </c:forEach>-->
