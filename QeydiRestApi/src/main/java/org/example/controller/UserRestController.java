@@ -17,6 +17,7 @@ public class UserRestController {
     private UserServiceInter userService;
 
     @GetMapping("/users")
+//    @CrossOrigin
     public ResponseEntity<ResponseDTO> getUsers(
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "surname", required = false) String surname,

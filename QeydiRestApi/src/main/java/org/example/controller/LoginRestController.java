@@ -7,10 +7,7 @@ import org.example.entity.User;
 import org.example.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -20,6 +17,7 @@ public class LoginRestController {
 
     private static BCrypt.Verifyer verifyer = BCrypt.verifyer();
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
     @GetMapping("/sign-in")
     public ResponseEntity<ResponseDTO> signIn(
 //            @RequestParam(name="email", required= false) String email,
