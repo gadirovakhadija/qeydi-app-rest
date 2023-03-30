@@ -39,19 +39,19 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
-    public String login(
-            @RequestBody UserDTO userDTO
-    ){
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
-
-        Authentication auth = authenticationManager.authenticate(authToken);
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
-        String jwtToken = jwtTokenProvider.generateJwtToken(auth);
-
-        return "Bearer " + jwtToken;
-    }
+//    @PostMapping("/login")
+//    public String login(
+//            @RequestBody UserDTO userDTO
+//    ){
+//        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
+//
+//        Authentication auth = authenticationManager.authenticate(authToken);
+//        SecurityContextHolder.getContext().setAuthentication(auth);
+//
+//        String jwtToken = jwtTokenProvider.generateJwtToken(auth);
+//
+//        return "Bearer " + jwtToken;
+//    }
 
 //    private static BCrypt.Hasher crypt = BCrypt.withDefaults();
     @PostMapping("/register")
@@ -64,7 +64,6 @@ public class UserRestController {
         User user = new User();
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-//        user.setPassword(crypt.hashToString(4, userDTO.getPassword().toCharArray()));
 
         userService.addUser(user);
         return new ResponseEntity<>("User succesfully registered ", HttpStatus.CREATED);

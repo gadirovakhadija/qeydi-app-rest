@@ -20,8 +20,6 @@ public class JwtTokenProvider {
     public String generateJwtToken(Authentication auth) {
         JwtUserDetails userDetails = (JwtUserDetails)auth.getPrincipal();
 
-//        Date expireDate = new Date(new Date().getTime()+EXPIRES_IN);
-
         Instant now = Instant.now();
         Instant expiresAt = now.plusSeconds(Long.parseLong(EXPIRES_IN));
         Date expireDate = Date.from(expiresAt);
