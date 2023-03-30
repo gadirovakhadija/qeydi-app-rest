@@ -24,16 +24,16 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
+//    @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
+//    @Autowired
     private JwtAuthenticationEntryPoint handler;
 
-//    public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthenticationEntryPoint handler) {
-//        this.userDetailsService = userDetailsService;
-//        this.handler = handler;
-//    }
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthenticationEntryPoint handler) {
+        this.userDetailsService = userDetailsService;
+        this.handler = handler;
+    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -76,7 +76,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(handler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
+                .authorizeHttpRequests()
                 .requestMatchers("/auth/**")
                 .permitAll()
                 .anyRequest().authenticated();

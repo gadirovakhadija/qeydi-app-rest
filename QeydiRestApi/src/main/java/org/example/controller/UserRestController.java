@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.example.dto.ResponseDTO;
 import org.example.dto.UserDTO;
 import org.example.entity.User;
@@ -39,14 +40,20 @@ public class UserRestController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserDTO userDTO){
+    public String login(
+            @RequestBody UserDTO userDTO
+    ){
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
+
         Authentication auth = authenticationManager.authenticate(authToken);
         SecurityContextHolder.getContext().setAuthentication(auth);
+
         String jwtToken = jwtTokenProvider.generateJwtToken(auth);
+
         return "Bearer " + jwtToken;
     }
 
+//    private static BCrypt.Hasher crypt = BCrypt.withDefaults();
     @PostMapping("/register")
     public ResponseEntity<String> register(
             @RequestBody UserDTO userDTO
@@ -57,12 +64,13 @@ public class UserRestController {
         User user = new User();
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+//        user.setPassword(crypt.hashToString(4, userDTO.getPassword().toCharArray()));
+
         userService.addUser(user);
         return new ResponseEntity<>("User succesfully registered ", HttpStatus.CREATED);
     }
 
     @GetMapping("/users")
-//    @CrossOrigin
     public ResponseEntity<ResponseDTO> getUsers(
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "surname", required = false) String surname,
