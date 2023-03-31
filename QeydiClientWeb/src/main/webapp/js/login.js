@@ -31,7 +31,7 @@ function getSignIn() {
     var ema = document.getElementById("emailId").value;
     var pass = document.getElementById("passwordId").value;
     var user = { email: ema, password: pass};
-    xhttp.open("GET", "http://localhost:8089/QeydiRestApi_war_exploded/sign-in", true);
+    xhttp.open("POST", "http://localhost:8089/QeydiRestApi_war_exploded/login/sign-in", true);
     xhttp.send(JSON.stringify(user));
     window.location ='users.html';
 

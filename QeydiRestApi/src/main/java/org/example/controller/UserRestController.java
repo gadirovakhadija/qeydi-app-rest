@@ -6,13 +6,8 @@ import org.example.dto.UserDTO;
 import org.example.entity.User;
 import org.example.security.JwtTokenProvider;
 import org.example.service.inter.UserServiceInter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/auth")
 public class UserRestController {
 //    @Autowired
     private AuthenticationManager authenticationManager;
@@ -39,43 +33,14 @@ public class UserRestController {
         this.userService = userService;
     }
 
-//    @PostMapping("/login")
-//    public String login(
-//            @RequestBody UserDTO userDTO
-//    ){
-//        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
-//
-//        Authentication auth = authenticationManager.authenticate(authToken);
-//        SecurityContextHolder.getContext().setAuthentication(auth);
-//
-//        String jwtToken = jwtTokenProvider.generateJwtToken(auth);
-//
-//        return "Bearer " + jwtToken;
-//    }
-
-//    private static BCrypt.Hasher crypt = BCrypt.withDefaults();
-    @PostMapping("/register")
-    public ResponseEntity<String> register(
-            @RequestBody UserDTO userDTO
-    ){
-        if(userService.findByEmail(userDTO.getEmail())!=null)
-            return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
-
-        User user = new User();
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-
-        userService.addUser(user);
-        return new ResponseEntity<>("User succesfully registered ", HttpStatus.CREATED);
-    }
-
     @GetMapping("/users")
     public ResponseEntity<ResponseDTO> getUsers(
-            @RequestParam(name = "name", required = false) String name,
-            @RequestParam(name = "surname", required = false) String surname,
-            @RequestParam(name = "email", required = false) String email
+            @RequestBody UserDTO userDTO
+//            @RequestParam(name = "name", required = false) String name,
+//            @RequestParam(name = "surname", required = false) String surname,
+//            @RequestParam(name = "email", required = false) String email
     ) {
-        List<User> users = userService.getAll(name, surname, email);
+        List<User> users = userService.getAll(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail());
 
         List<UserDTO> userDTOS = new ArrayList<>();
 
@@ -83,7 +48,7 @@ public class UserRestController {
             User u = users.get(i);
             userDTOS.add(new UserDTO(u));
         }
-
+        System.out.println(ResponseEntity.ok(ResponseDTO.of(userDTOS)));
         return ResponseEntity.ok(ResponseDTO.of(userDTOS));
     }
 

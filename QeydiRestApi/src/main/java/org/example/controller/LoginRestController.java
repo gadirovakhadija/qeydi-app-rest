@@ -18,23 +18,24 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
+@RequestMapping("/login")
 public class LoginRestController {
-        @Autowired
+    @Autowired
     private AuthenticationManager authenticationManager;
-        @Autowired
+    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-        @Autowired
+    @Autowired
     private PasswordEncoder passwordEncoder;
-        @Autowired
+    @Autowired
     private UserServiceInter userService;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
+    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     @PostMapping("/sign-in")
     public String signIn(
-                    @RequestBody UserDTO userDTO
-    ){
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
+            @RequestBody UserDTO userDTO
+    ) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword());
 
         Authentication auth = authenticationManager.authenticate(authToken);
         SecurityContextHolder.getContext().setAuthentication(auth);
@@ -47,8 +48,8 @@ public class LoginRestController {
     @PostMapping("/sign-up")
     public ResponseEntity<String> signUp(
             @RequestBody UserDTO userDTO
-    ){
-        if(userService.findByEmail(userDTO.getEmail())!=null)
+    ) {
+        if (userService.findByEmail(userDTO.getEmail()) != null)
             return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
 
         User user = new User();
