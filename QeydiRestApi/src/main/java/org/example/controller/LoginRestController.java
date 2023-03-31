@@ -30,7 +30,7 @@ public class LoginRestController {
     @Autowired
     private UserServiceInter userService;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+//    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     @PostMapping("/sign-in")
     public String signIn(
             @RequestBody UserDTO userDTO
@@ -53,6 +53,8 @@ public class LoginRestController {
             return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
 
         User user = new User();
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
