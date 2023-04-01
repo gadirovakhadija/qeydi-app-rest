@@ -1,4 +1,4 @@
-package org.example;
+package org.example.security;
 
 import org.example.security.JwtAuthenticationEntryPoint;
 import org.example.security.JwtAuthenticationFilter;
