@@ -36,11 +36,8 @@ public class UserRestController {
     @GetMapping("/users")
     public ResponseEntity<ResponseDTO> getUsers(
             @RequestBody UserDTO userDTO
-//            @RequestParam(name = "name", required = false) String name,
-//            @RequestParam(name = "surname", required = false) String surname,
-//            @RequestParam(name = "email", required = false) String email
     ) {
-        List<User> users = userService.getAll(userDTO.getName(), userDTO.getSurname(), userDTO.getEmail());
+        List<User> users = userService.findAll();
 
         List<UserDTO> userDTOS = new ArrayList<>();
 
