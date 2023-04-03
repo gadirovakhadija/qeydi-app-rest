@@ -6,6 +6,7 @@ import org.example.dto.UserDTO;
 import org.example.entity.User;
 import org.example.security.JwtTokenProvider;
 import org.example.service.inter.UserServiceInter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,22 +17,9 @@ import java.util.List;
 
 @RestController
 public class UserRestController {
-//    @Autowired
-    private AuthenticationManager authenticationManager;
-//    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-//    @Autowired
-    private PasswordEncoder passwordEncoder;
-//    @Autowired
+    @Autowired
     private UserServiceInter userService;
 
-    public UserRestController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, PasswordEncoder passwordEncoder, UserServiceInter userService) {
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
-    }
 
     @GetMapping("/users")
     public ResponseEntity<ResponseDTO> getUsers(

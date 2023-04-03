@@ -24,10 +24,26 @@
 //     xhttp.send();
 // }
 
+function getToken() {
+    let token = null;
+    if (document.cookie) {
+        let cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.startsWith("token=")) {
+                token = cookie.substring("token=".length, cookie.length);
+                console.log("Menim token"+token);
+                break;
+            }
+        }
+    }
+    return token;
+}
+
 function getUsers() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:8089/QeydiRestApi_war_exploded/users/8', true);
- xhr.setRequestHeader('Authorization', token);
+    xhr.open('GET', 'http://localhost:8089/QeydiRestApi_war_exploded/users', true);
+ xhr.setRequestHeader('Authorization', getToken());
     xhr.send();
 
     xhr.onload = function () {

@@ -62,26 +62,28 @@ function submitLoginForm() {
 function signIn() {
     let email = document.getElementById("emailId").value;
     let password = document.getElementById("passwordId").value;
+    let xhr = new XMLHttpRequest();
 
-    console.log(email);
+    xhr.open("POST", "http://localhost:8089/QeydiRestApi_war_exploded/login/sign-in");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4&&xhr.status === 200) {
+                let token = xhr.responseText;
+                console.log("Token: " + token);
+                document.cookie = "token=" + token;
+                window.location.href = "users.html";
+            } else {
+                console.error(xhr.statusText);
+                // Display an error message to the user
+                alert("Login failed. Please try again.");
+            }
+    };
+
     let data = {
         email: email,
         password: password
     };
-    console.log(data);
 
-    fetch("http://localhost:8089/QeydiRestApi_war_exploded/login/sign-in", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.text())
-        .then(token => {
-            console.log("Token: " + token);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    xhr.send(JSON.stringify(data));
 }
