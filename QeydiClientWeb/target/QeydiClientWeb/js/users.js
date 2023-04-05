@@ -32,7 +32,7 @@ function getUsers() {
     // var user = {email: ema, password: pass};
     xhttp.open("GET", "http://localhost:8089/QeydiRestApi_war_exploded/users", true);
     xhr.setRequestHeader('Authorization', getToken());
-    
+
     xhttp.send();
     // xhttp.send(JSON.stringify(user));
     // window.location = 'users.html';
