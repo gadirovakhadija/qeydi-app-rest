@@ -22,7 +22,7 @@ public class UserRestController {
 
 
     @GetMapping("/users")
-    public ResponseEntity<ResponseDTO> getUsers(
+    private ResponseEntity<ResponseDTO> getUsers(
             @RequestBody UserDTO userDTO
     ) {
         List<User> users = userService.findAll();

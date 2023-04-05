@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+/*@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');*/
 
 * {
     box-sizing: border-box;
@@ -86,17 +86,6 @@ form {
     text-align: center;
 }
 
-#in {
-    background-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 50px;
-    height: 100%;
-    text-align: center;
-}
-
 input {
     background-color: #eee;
     border: none;
@@ -128,6 +117,16 @@ input {
     left: 0;
     width: 50%;
     z-index: 2;
+}
+.signin{
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
 }
 
 .container.right-panel-active .sign-in-container {
