@@ -1,17 +1,14 @@
 package org.example.controller;
 
 import org.example.dto.UserDTO;
-import org.example.entity.User;
 import org.example.security.JwtTokenProvider;
-import org.example.service.inter.UserServiceInter;
+import org.example.service.UserControlServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,14 +18,11 @@ public class LoginRestController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserServiceInter userService;
+    private UserControlServiceInter userControlService;
 
     @PostMapping("/sign-in")
-    public String signIn(
+    private String signIn(
             @RequestBody UserDTO userDTO
     ) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword());
@@ -42,19 +36,9 @@ public class LoginRestController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signUp(
+    private ResponseEntity<String> signUp(
             @RequestBody UserDTO userDTO
     ) {
-        if (userService.findByEmail(userDTO.getEmail()) != null)
-            return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
-
-        User user = new User();
-        user.setName(userDTO.getName());
-        user.setSurname(userDTO.getSurname());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-
-        userService.addUser(user);
-        return new ResponseEntity<>("User succesfully registered ", HttpStatus.CREATED);
+        return userControlService.signUp(userDTO);
     }
 }

@@ -1,9 +1,11 @@
 package org.example.dto;
 
+import lombok.Data;
 import org.example.entity.Subject;
 import org.example.entity.Teachway;
 import org.example.entity.User;
 
+@Data
 public class UserDTO {
     private int id;
 

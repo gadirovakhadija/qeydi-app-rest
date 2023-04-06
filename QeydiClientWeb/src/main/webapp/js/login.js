@@ -1,3 +1,4 @@
+"use strict";
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
@@ -11,7 +12,7 @@ signInButton.addEventListener('click', () => {
 });
 
 function passwordVisibility() {
-    var x = document.getElementById("passwordId");
+    let x = document.getElementById("passwordId");
     if (x.type === "password") {
         x.type = "text";
     } else {

@@ -1,3 +1,4 @@
+"use strict";
 function goCv(email) {
     window.location = 'cv?email=' + email;
 }
@@ -19,11 +20,11 @@ function getToken() {
 }
 
 function getUsers() {
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(this.responseText);
-            var list = response.obj;
+            let response = JSON.parse(this.responseText);
+            let list = response.obj;
             printUsers(list);
         }
     };
