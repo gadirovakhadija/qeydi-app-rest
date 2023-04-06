@@ -1,31 +1,16 @@
 package org.example.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeachwayDTO {
     private int id;
 
     private String teachway;
 
-    public TeachwayDTO() {
-    }
 
-    public TeachwayDTO(int id, String teachway) {
-        this.id = id;
-        this.teachway = teachway;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTeachway() {
-        return teachway;
-    }
-
-    public void setTeachway(String teachway) {
-        this.teachway = teachway;
-    }
 }
