@@ -17,6 +17,7 @@ import java.util.List;
 public class UserControlServiceImpl implements UserControlServiceInter {
     private final UserServiceInter userService;
     private final PasswordEncoder passwordEncoder;
+
     public UserControlServiceImpl(UserServiceInter userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -29,7 +30,7 @@ public class UserControlServiceImpl implements UserControlServiceInter {
 
         List<UserDTO> userDTOS = new ArrayList<>();
 
-        for(int i=0;i<users.size();i++){
+        for (int i = 0; i < users.size(); i++) {
             User u = users.get(i);
             userDTOS.add(new UserDTO(u));
         }
@@ -46,16 +47,16 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     @Override
     public ResponseEntity<ResponseDTO> deleteUser(int id) {
         User user = userService.findById(id);
-        if(user==null)
+        if (user == null)
             throw new UsernameNotFoundException("User not found");
 
         userService.deleteUserById(id);
 
-        return ResponseEntity.ok(ResponseDTO.of(new UserDTO(user),"Deleted Successfully"));
+        return ResponseEntity.ok(ResponseDTO.of(new UserDTO(user), "Deleted Successfully"));
     }
 
     @Override
-    public ResponseEntity<String> updateUser(UserDTO userDTO){
+    public ResponseEntity<String> updateUser(UserDTO userDTO) {
         if (userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword()) == null)
             return new ResponseEntity<>("Information isn't correct", HttpStatus.BAD_REQUEST);
 
@@ -95,7 +96,8 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     @Override
     public ResponseEntity<String> reset(UserDTO userDTO) {
         if (userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword()) == null)
-            return new ResponseEntity<>("Information isn't correct", HttpStatus.BAD_REQUEST);
+            throw new IllegalArgumentException("Infomation doesnt correct");
+//            return new ResponseEntity<>("Information isn't correct", HttpStatus.BAD_REQUEST);
 
         User user = userService.findByEmail(userDTO.getEmail());
 

@@ -23,8 +23,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
             return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
         }
 
-
-
+        
         @ExceptionHandler(UnauthorizedUserException.class)
         public ResponseEntity<ResponseDTO> handleUnauthorizedException(UnauthorizedUserException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
