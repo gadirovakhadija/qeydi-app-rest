@@ -4,9 +4,9 @@ import org.example.dto.ResponseDTO;
 import org.example.dto.UserDTO;
 import org.example.entity.User;
 import org.example.service.inter.UserServiceInter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +46,9 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     @Override
     public ResponseEntity<ResponseDTO> deleteUser(int id) {
         User user = userService.findById(id);
+        if(user==null)
+            throw new UsernameNotFoundException("User not found");
+
         userService.deleteUserById(id);
 
         return ResponseEntity.ok(ResponseDTO.of(new UserDTO(user),"Deleted Successfully"));
@@ -76,7 +79,8 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     @Override
     public ResponseEntity<String> signUp(UserDTO userDTO) {
         if (userService.findByEmail(userDTO.getEmail()) != null)
-            return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
+            throw new IllegalArgumentException("User Already in use");
+//            return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
 
         User user = new User();
         user.setName(userDTO.getName());

@@ -41,7 +41,7 @@ public class UserRestController {
         return userControlService.updateUser(userDTO);
     }
 
-    @PostMapping("/reset")
+    @PutMapping("/reset")
     private ResponseEntity<String> reset(
             @RequestBody UserDTO userDTO
     ) {

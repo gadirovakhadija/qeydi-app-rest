@@ -35,7 +35,7 @@ public class LoginRestController {
         return "Bearer " + jwtToken;
     }
 
-    @PostMapping("/sign-up")
+    @PutMapping("/sign-up")
     private ResponseEntity<String> signUp(
             @RequestBody UserDTO userDTO
     ) {
