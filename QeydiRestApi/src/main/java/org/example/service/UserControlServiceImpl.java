@@ -25,40 +25,39 @@ public class UserControlServiceImpl implements UserControlServiceInter {
 
 
     @Override
-    public ResponseEntity<ResponseDTO> getUsers(UserDTO userDTO) {
-        List<User> users = userService.findAll();
+    public List<ResponseDTO> getUsers(UserDTO userDTO) {
 
+        List<User> users = userService.findAll();
         List<UserDTO> userDTOS = new ArrayList<>();
 
-        for (int i = 0; i < users.size(); i++) {
-            User u = users.get(i);
-            userDTOS.add(new UserDTO(u));
+        List<ResponseDTO> responseDTOs = new ArrayList<>();
+        for (UserDTO user : userDTOS) {
+            responseDTOs.add(ResponseDTO.of(user));
         }
-        System.out.println(ResponseEntity.ok(ResponseDTO.of(userDTOS)));
-        return ResponseEntity.ok(ResponseDTO.of(userDTOS));
+        return responseDTOs;
+
     }
 
     @Override
-    public ResponseEntity<ResponseDTO> getUser(int id) {
-        User u = userService.findById(id);
-        return ResponseEntity.ok(ResponseDTO.of(u));
+    public ResponseDTO getUser(int id) {
+        return ResponseDTO.of(userService.findById(id));
     }
 
     @Override
-    public ResponseEntity<ResponseDTO> deleteUser(int id) {
+    public ResponseDTO deleteUser(int id) {
         User user = userService.findById(id);
         if (user == null)
             throw new UsernameNotFoundException("User not found");
 
         userService.deleteUserById(id);
 
-        return ResponseEntity.ok(ResponseDTO.of(new UserDTO(user), "Deleted Successfully"));
+        return ResponseDTO.of(new UserDTO(user), "Deleted Successfully");
     }
 
     @Override
-    public ResponseEntity<String> updateUser(UserDTO userDTO) {
+    public String updateUser(UserDTO userDTO) {
         if (userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword()) == null)
-            return new ResponseEntity<>("Information isn't correct", HttpStatus.BAD_REQUEST);
+            throw new UsernameNotFoundException("User not found");
 
         User user = userService.findByEmail(userDTO.getEmail());
 
@@ -74,7 +73,7 @@ public class UserControlServiceImpl implements UserControlServiceInter {
         user.setCost(userDTO.getCost());
 
         userService.addUser(user);
-        return new ResponseEntity<>("User succesfully registered !", HttpStatus.CREATED);
+        return "User succesfully registered !";
     }
 
     @Override
@@ -96,7 +95,7 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     @Override
     public ResponseEntity<String> reset(UserDTO userDTO) {
         if (userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword()) == null)
-            throw new IllegalArgumentException("Infomation doesnt correct");
+            throw new IllegalArgumentException("Infomation doesn't correct");
 //            return new ResponseEntity<>("Information isn't correct", HttpStatus.BAD_REQUEST);
 
         User user = userService.findByEmail(userDTO.getEmail());
@@ -105,4 +104,16 @@ public class UserControlServiceImpl implements UserControlServiceInter {
 
         return new ResponseEntity<>("User successfully registered !", HttpStatus.CREATED);
     }
+
+
+    @Override
+    public List<User> findUsersByTeachway(String teachway) {
+        return userService.findByTeachway(teachway);
+    }
+
+    @Override
+    public List<User> findUsersBySubject(String subject) {
+        return userService.findBySubject(subject);
+    }
+
 }

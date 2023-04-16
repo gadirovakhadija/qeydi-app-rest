@@ -2,51 +2,62 @@ package org.example.controller;
 
 import org.example.dto.ResponseDTO;
 import org.example.dto.UserDTO;
+import org.example.entity.User;
 import org.example.service.UserControlServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
+@RequestMapping("/users")
 public class UserRestController {
     @Autowired
     private UserControlServiceInter userControlService;
 
-    @GetMapping("/users")
-    private ResponseEntity<ResponseDTO> getUsers(
+    @GetMapping
+    private ResponseEntity<List<ResponseDTO>> getUsers(
             @RequestBody UserDTO userDTO
     ) {
-        return userControlService.getUsers(userDTO);
+        List<ResponseDTO> u = userControlService.getUsers(userDTO);
+        return ResponseEntity.ok(u);
     }
 
-    @GetMapping("/users/{id}")
-    private ResponseEntity<ResponseDTO> getUser(
-            @PathVariable("id") int id
-    ) {
-        return userControlService.getUser(id);
-    }
+//    @GetMapping("/{id}")
+//    private ResponseEntity<ResponseDTO> getUser(
+//            @PathVariable("id") int id
+//    ) {
+//        return ResponseEntity.ok(userControlService.getUser(id));
+//    }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     private ResponseEntity<ResponseDTO> deleteUser(
             @PathVariable("id") int id
     ) {
-        return userControlService.deleteUser(id);
+//        return
+        return ResponseEntity.ok(userControlService.deleteUser(id));
     }
 
-    @PutMapping("/registration")
-    private ResponseEntity<String> registerUser(
-            @RequestBody UserDTO userDTO
-    ) {
-        return userControlService.updateUser(userDTO);
+//    @GetMapping("/{teachway}")
+//    public ResponseEntity<List<User>> getUsersByTeachway(@PathVariable String teachway) {
+//        List<User> userList = userControlService.findUsersByTeachway(teachway);
+//        return ResponseEntity.ok(userList);
+//    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<User>> getUsersByTeachway(@RequestParam String teachway) {
+        List<User> userList = userControlService.findUsersByTeachway(teachway);
+        return ResponseEntity.ok(userList);
     }
 
-    @PutMapping("/reset")
-    private ResponseEntity<String> reset(
-            @RequestBody UserDTO userDTO
-    ) {
-        return userControlService.reset(userDTO);
-    }
+
+//    @GetMapping("/{subject}")
+//    public ResponseEntity<List<User>> getUsersBySubject(@PathVariable String subject) {
+//        List<User> userList = userControlService.findUsersBySubject(subject);
+//        return ResponseEntity.ok(userList);
+//    }
 
 
 }

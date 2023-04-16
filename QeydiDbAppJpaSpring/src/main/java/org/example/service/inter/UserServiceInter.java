@@ -7,13 +7,19 @@ import java.util.List;
 public interface UserServiceInter {
 
     List<User> getAll(String name, String surname, String email);
+
     List<User> findAll();
+
     User findByEmail(String email);
+
     User findById(int id);
+
     int findIdByEmail(String email);
+
     void updateUser(User u);
 
     void deleteUserById(int id);
+
     User findUserByEmailAndPassword(String email, String password);
 
     int findIdByEmailAndPassword(String email, String password);
@@ -22,7 +28,9 @@ public interface UserServiceInter {
 
     void updatePassword(User u);
 
+    List<User> findByTeachway(String teachway);
 
+    List<User> findBySubject(String subject);
 
 
 }
