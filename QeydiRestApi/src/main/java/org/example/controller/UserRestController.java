@@ -25,39 +25,33 @@ public class UserRestController {
         return ResponseEntity.ok(u);
     }
 
-//    @GetMapping("/{id}")
-//    private ResponseEntity<ResponseDTO> getUser(
-//            @PathVariable("id") int id
-//    ) {
-//        return ResponseEntity.ok(userControlService.getUser(id));
-//    }
+    @GetMapping("/{id}")
+    private ResponseEntity<ResponseDTO> getUser(
+            @PathVariable("id") int id
+    ) {
+        return ResponseEntity.ok(userControlService.getUser(id));
+    }
 
     @DeleteMapping("/{id}")
     private ResponseEntity<ResponseDTO> deleteUser(
             @PathVariable("id") int id
     ) {
-//        return
         return ResponseEntity.ok(userControlService.deleteUser(id));
     }
 
-//    @GetMapping("/{teachway}")
-//    public ResponseEntity<List<User>> getUsersByTeachway(@PathVariable String teachway) {
-//        List<User> userList = userControlService.findUsersByTeachway(teachway);
-//        return ResponseEntity.ok(userList);
-//    }
 
-    @GetMapping("/")
+    @GetMapping("/teachway/")
     public ResponseEntity<List<User>> getUsersByTeachway(@RequestParam String teachway) {
         List<User> userList = userControlService.findUsersByTeachway(teachway);
         return ResponseEntity.ok(userList);
     }
 
 
-//    @GetMapping("/{subject}")
-//    public ResponseEntity<List<User>> getUsersBySubject(@PathVariable String subject) {
-//        List<User> userList = userControlService.findUsersBySubject(subject);
-//        return ResponseEntity.ok(userList);
-//    }
+    @GetMapping("/subject/")
+    public ResponseEntity<List<User>> getUsersBySubject(@RequestParam String subject) {
+        List<User> userList = userControlService.findUsersBySubject(subject);
+        return ResponseEntity.ok(userList);
+    }
 
 
 }
