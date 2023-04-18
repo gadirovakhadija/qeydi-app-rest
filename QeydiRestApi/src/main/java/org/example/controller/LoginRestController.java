@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.dto.ResponseDTO;
 import org.example.dto.UserDTO;
 import org.example.security.JwtTokenProvider;
 import org.example.service.UserControlServiceInter;
@@ -36,9 +37,9 @@ public class LoginRestController {
     }
 
     @PutMapping("/sign-up")
-    private ResponseEntity<String> signUp(
+    private ResponseEntity<ResponseDTO> signUp(
             @RequestBody UserDTO userDTO
     ) {
-        return userControlService.signUp(userDTO);
+        return ResponseEntity.ok(userControlService.signUp(userDTO));
     }
 }

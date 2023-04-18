@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.dto.ResponseDTO;
 import org.example.dto.UserDTO;
 import org.example.service.UserControlServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class ActionRestController {
     private UserControlServiceInter userControlService;
 
     @PutMapping("/registration")
-    private ResponseEntity<String> registerUser(
+    private ResponseEntity<ResponseDTO> registerUser(
             @RequestBody UserDTO userDTO
     ) {
         return ResponseEntity.ok(userControlService.updateUser(userDTO));
@@ -22,9 +23,9 @@ public class ActionRestController {
 
 
     @PutMapping("/reset")
-    private ResponseEntity<String> reset(
+    private ResponseEntity<ResponseDTO> reset(
             @RequestBody UserDTO userDTO
     ) {
-        return userControlService.reset(userDTO);
+        return ResponseEntity.ok(userControlService.reset(userDTO));
     }
 }

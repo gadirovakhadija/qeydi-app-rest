@@ -11,9 +11,9 @@ public interface UserControlServiceInter {
     List<ResponseDTO> getUsers();
     ResponseDTO getUser(int id);
     ResponseDTO deleteUser(int id);
-    String updateUser(UserDTO userDTO);
-    ResponseEntity<String> signUp(UserDTO userDTO);
-    ResponseEntity<String> reset(UserDTO userDTO);
+    ResponseDTO updateUser(UserDTO userDTO);
+    ResponseDTO signUp(UserDTO userDTO);
+    ResponseDTO reset(UserDTO userDTO);
     List<User> findUsersByTeachway(String teachway);
     List<User> findUsersBySubject(String subject);
 }

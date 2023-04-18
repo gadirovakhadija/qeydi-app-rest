@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,14 +28,12 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     public List<ResponseDTO> getUsers() {
 
         List<User> users = userService.findAll();
-
         List<ResponseDTO> responseDTOs = new LinkedList<>();
+
         for (User user : users) {
             responseDTOs.add(ResponseDTO.of(user));
         }
-
         return responseDTOs;
-
     }
 
     @Override
@@ -56,7 +53,7 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     }
 
     @Override
-    public String updateUser(UserDTO userDTO) {
+    public ResponseDTO updateUser(UserDTO userDTO) {
         if (userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword()) == null)
             throw new UsernameNotFoundException("User not found");
 
@@ -74,14 +71,13 @@ public class UserControlServiceImpl implements UserControlServiceInter {
         user.setCost(userDTO.getCost());
 
         userService.addUser(user);
-        return "User succesfully registered !";
+        return ResponseDTO.of(new UserDTO(user), "User updated!");
     }
 
     @Override
-    public ResponseEntity<String> signUp(UserDTO userDTO) {
+    public ResponseDTO signUp(UserDTO userDTO) {
         if (userService.findByEmail(userDTO.getEmail()) != null)
             throw new IllegalArgumentException("User Already in use");
-//            return new ResponseEntity<>("Username already in use", HttpStatus.BAD_REQUEST);
 
         User user = new User();
         user.setName(userDTO.getName());
@@ -90,11 +86,11 @@ public class UserControlServiceImpl implements UserControlServiceInter {
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         userService.addUser(user);
-        return new ResponseEntity<>("User succesfully registered ", HttpStatus.CREATED);
+        return ResponseDTO.of(new UserDTO(user),"User succesfully registered ");
     }
 
     @Override
-    public ResponseEntity<String> reset(UserDTO userDTO) {
+    public ResponseDTO reset(UserDTO userDTO) {
         if (userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword()) == null)
             throw new IllegalArgumentException("Infomation doesn't correct");
 //            return new ResponseEntity<>("Information isn't correct", HttpStatus.BAD_REQUEST);
@@ -103,7 +99,7 @@ public class UserControlServiceImpl implements UserControlServiceInter {
 
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
-        return new ResponseEntity<>("User successfully registered !", HttpStatus.CREATED);
+        return ResponseDTO.of(new UserDTO(user),"User successfully registered !");
     }
 
 
