@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -25,15 +26,15 @@ public class UserControlServiceImpl implements UserControlServiceInter {
 
 
     @Override
-    public List<ResponseDTO> getUsers(UserDTO userDTO) {
+    public List<ResponseDTO> getUsers() {
 
         List<User> users = userService.findAll();
-        List<UserDTO> userDTOS = new ArrayList<>();
 
-        List<ResponseDTO> responseDTOs = new ArrayList<>();
-        for (UserDTO user : userDTOS) {
+        List<ResponseDTO> responseDTOs = new LinkedList<>();
+        for (User user : users) {
             responseDTOs.add(ResponseDTO.of(user));
         }
+
         return responseDTOs;
 
     }

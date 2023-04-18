@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface UserControlServiceInter {
-    List<ResponseDTO> getUsers(UserDTO userDTO);
+    List<ResponseDTO> getUsers();
     ResponseDTO getUser(int id);
     ResponseDTO deleteUser(int id);
     String updateUser(UserDTO userDTO);

@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.dto.ResponseDTO;
-import org.example.dto.UserDTO;
 import org.example.entity.User;
 import org.example.service.UserControlServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,9 @@ public class UserRestController {
 
     @GetMapping
     private ResponseEntity<List<ResponseDTO>> getUsers(
-            @RequestBody UserDTO userDTO
+//            @RequestBody UserDTO userDTO
     ) {
-        List<ResponseDTO> u = userControlService.getUsers(userDTO);
+        List<ResponseDTO> u = userControlService.getUsers();
         return ResponseEntity.ok(u);
     }
 
