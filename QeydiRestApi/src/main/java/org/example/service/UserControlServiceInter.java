@@ -9,11 +9,18 @@ import java.util.List;
 
 public interface UserControlServiceInter {
     List<ResponseDTO> getUsers();
+
     ResponseDTO getUser(int id);
+
     ResponseDTO deleteUser(int id);
+
     ResponseDTO updateUser(UserDTO userDTO);
+
     ResponseDTO signUp(UserDTO userDTO);
+
     ResponseDTO reset(UserDTO userDTO);
+
     List<User> findUsersByTeachway(String teachway);
+
     List<User> findUsersBySubject(String subject);
 }

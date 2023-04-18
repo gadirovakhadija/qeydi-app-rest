@@ -4,8 +4,6 @@ import org.example.dto.ResponseDTO;
 import org.example.dto.UserDTO;
 import org.example.entity.User;
 import org.example.service.inter.UserServiceInter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,11 +42,11 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     @Override
     public ResponseDTO deleteUser(int id) {
         User user = userService.findById(id);
+
         if (user == null)
             throw new UsernameNotFoundException("User not found");
 
         userService.deleteUserById(id);
-
         return ResponseDTO.of(new UserDTO(user), "Deleted Successfully");
     }
 
@@ -93,10 +91,8 @@ public class UserControlServiceImpl implements UserControlServiceInter {
     public ResponseDTO reset(UserDTO userDTO) {
         if (userService.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword()) == null)
             throw new IllegalArgumentException("Infomation doesn't correct");
-//            return new ResponseEntity<>("Information isn't correct", HttpStatus.BAD_REQUEST);
 
         User user = userService.findByEmail(userDTO.getEmail());
-
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         return ResponseDTO.of(new UserDTO(user),"User successfully registered !");

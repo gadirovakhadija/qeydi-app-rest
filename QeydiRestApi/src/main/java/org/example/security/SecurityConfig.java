@@ -55,7 +55,8 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(false);
-        config.addAllowedOrigin("http://localhost:8085/QeydiClientWeb_war_exploded");
+        config.addAllowedOrigin("*");
+//        config.addAllowedOrigin("http://localhost:8085/QeydiClientWeb_war_exploded");
         config.addAllowedHeader("Content-Type");
         config.addAllowedHeader("Accept");
         config.addAllowedHeader("Authorization");
@@ -79,7 +80,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET,"/users")
                 .permitAll()
-                .requestMatchers("/login/**")
+                .requestMatchers("/login")
                 .permitAll()
                 .anyRequest().authenticated();
 

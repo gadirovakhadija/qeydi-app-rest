@@ -22,7 +22,7 @@ public class LoginRestController {
     @Autowired
     private UserControlServiceInter userControlService;
 
-    @PostMapping("/sign-in")
+    @PostMapping
     private String signIn(
             @RequestBody UserDTO userDTO
     ) {
@@ -36,7 +36,7 @@ public class LoginRestController {
         return "Bearer " + jwtToken;
     }
 
-    @PutMapping("/sign-up")
+    @PutMapping
     private ResponseEntity<ResponseDTO> signUp(
             @RequestBody UserDTO userDTO
     ) {

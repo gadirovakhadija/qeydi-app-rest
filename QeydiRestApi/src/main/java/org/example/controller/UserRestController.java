@@ -18,7 +18,6 @@ public class UserRestController {
 
     @GetMapping
     private ResponseEntity<List<ResponseDTO>> getUsers(
-//            @RequestBody UserDTO userDTO
     ) {
         List<ResponseDTO> u = userControlService.getUsers();
         return ResponseEntity.ok(u);
@@ -41,15 +40,19 @@ public class UserRestController {
 
     @GetMapping("/teachway/")
     public ResponseEntity<List<User>> getUsersByTeachway(@RequestParam String teachway) {
+
         List<User> userList = userControlService.findUsersByTeachway(teachway);
         return ResponseEntity.ok(userList);
+
     }
 
 
     @GetMapping("/subject/")
     public ResponseEntity<List<User>> getUsersBySubject(@RequestParam String subject) {
+
         List<User> userList = userControlService.findUsersBySubject(subject);
         return ResponseEntity.ok(userList);
+
     }
 
 

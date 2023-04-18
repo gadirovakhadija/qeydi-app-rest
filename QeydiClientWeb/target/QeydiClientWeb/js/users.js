@@ -1,6 +1,4 @@
-function goCv(email) {
-    window.location = 'cv?email=' + email;
-}
+"use strict";
 
 function getToken() {
     let token = null;
@@ -19,23 +17,24 @@ function getToken() {
 }
 
 function getUsers() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(this.responseText);
-            var list = response.obj;
-            printUsers(list);
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(this.responseText);
+                let list = response.name;
+                console.log(list);
+            }
         }
     };
     // var ema = document.getElementById("emailId").value;
     // var pass = document.getElementById("passwordId").value;
     // var user = {email: ema, password: pass};
-    xhttp.open("GET", "http://localhost:8089/QeydiRestApi_war_exploded/users", true);
+    xhr.open("GET", "http://localhost:8089/QeydiRestApi_war_exploded/users", true);
     xhr.setRequestHeader('Authorization', getToken());
 
-    xhttp.send();
-    // xhttp.send(JSON.stringify(user));
-    // window.location = 'users.html';
+    xhr.send();
+
 }
 function displayData(data) {
     const tableBody = document.getElementById('table-body');

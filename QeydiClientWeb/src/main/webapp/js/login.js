@@ -26,7 +26,7 @@ function signIn() {
     let password = document.getElementById("passwordId").value;
     let xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "http://localhost:8089/QeydiRestApi_war_exploded/login/sign-in");
+    xhr.open("POST", "http://localhost:8089/QeydiRestApi_war_exploded/login");
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function() {
@@ -39,7 +39,6 @@ function signIn() {
             } else {
                 window.location.href ="login.html";
                 console.error(xhr.statusText);
-                // Display an error message to the user
                 alert("Login failed. Please try again.");
             }
         }
