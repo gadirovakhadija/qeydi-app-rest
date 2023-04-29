@@ -1,15 +1,18 @@
 package org.example;
 
 import org.example.dao.UserRepository;
+import org.example.dao.UserRepositoryCustom;
 import org.example.entity.Teachway;
+import org.example.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
 public class QeydiDbAppJpaSpringApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -22,13 +25,15 @@ public class QeydiDbAppJpaSpringApplication implements CommandLineRunner {
 @Autowired
 private UserRepository userRepo;
 
-//@Autowired
-//private UserServiceInter userServiceInter;
+@Autowired
+@Qualifier("userRepoImpl")
+private UserRepositoryCustom userrepo;
 //
     @Override
     public void run(String... args) throws Exception {
 
 
+        System.out.println(userrepo.getUsersByTeachwayName("qul"));
 //        System.out.println(userRepo.findByTeachway_Teachway("Magistratura"));
 
 
