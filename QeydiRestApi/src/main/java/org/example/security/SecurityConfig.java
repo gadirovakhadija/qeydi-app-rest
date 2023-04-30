@@ -78,7 +78,7 @@ public class SecurityConfig {
                 .exceptionHandling().authenticationEntryPoint(handler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET,"/users")
+                .requestMatchers(HttpMethod.GET,"/users/**")
                 .permitAll()
                 .requestMatchers("/login")
                 .permitAll()

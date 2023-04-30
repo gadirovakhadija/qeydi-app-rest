@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserRepositoryCustom {
     public List<User> getAll(String name, String surname, String email);
-    public List<User> getUsersByTeachwayName(String teachwayName);
+    public List<User> getUsersByTeachway(String teachway);
+
+    public List<User> getUsersBySubject(String subject);
 
 }

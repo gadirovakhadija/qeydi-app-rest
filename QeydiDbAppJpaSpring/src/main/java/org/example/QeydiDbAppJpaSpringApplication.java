@@ -33,7 +33,7 @@ private UserRepositoryCustom userrepo;
     public void run(String... args) throws Exception {
 
 
-        System.out.println(userrepo.getUsersByTeachwayName("qul"));
+//        System.out.println(userrepo.getUsersBySubject("zi").listIterator());
 //        System.out.println(userRepo.findByTeachway_Teachway("Magistratura"));
 
 

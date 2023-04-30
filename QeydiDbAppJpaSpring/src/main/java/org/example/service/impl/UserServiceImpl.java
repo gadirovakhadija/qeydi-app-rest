@@ -112,12 +112,12 @@ public class UserServiceImpl implements UserServiceInter {
 
     @Override
     public List<User> findByTeachway(String teachway) {
-        return userRepo.findByTeachway_Teachway(teachway);
+        return userRepoCust.getUsersByTeachway(teachway);
     }
 
     @Override
     public List<User> findBySubject(String subject) {
-        return userRepo.findBySubject_Subject(subject);
+        return userRepoCust.getUsersBySubject(subject);
     }
 
 
