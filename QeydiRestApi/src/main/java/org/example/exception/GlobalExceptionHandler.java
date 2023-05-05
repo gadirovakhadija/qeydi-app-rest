@@ -47,7 +47,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ResponseDTO(404, e.getMessage()));
     }
-    
+
 
 }
 
