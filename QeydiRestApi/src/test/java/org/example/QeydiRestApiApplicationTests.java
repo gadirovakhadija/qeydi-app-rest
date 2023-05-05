@@ -8,6 +8,7 @@ class QeydiRestApiApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
