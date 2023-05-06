@@ -1,4 +1,4 @@
-package org.example.dao;
+package org.example.repo;
 
 import org.example.entity.User;
 

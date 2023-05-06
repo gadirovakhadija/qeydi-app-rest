@@ -1,13 +1,10 @@
-package org.example.dao;
+package org.example.repo;
 
 
-import org.example.dao.impl.SubjectRepositoryCustom;
 import org.example.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface SubjectRepository extends JpaRepository<Subject,Long>, SubjectRepositoryCustom {
+public interface SubjectRepository extends JpaRepository<Subject,Long> {
 
     Subject findById(int id);
 

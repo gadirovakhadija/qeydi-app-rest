@@ -1,15 +1,12 @@
 package org.example;
 
-import org.example.dao.UserRepository;
-import org.example.dao.UserRepositoryCustom;
-import org.example.entity.Teachway;
-import org.example.service.inter.UserServiceInter;
+import org.example.repo.UserRepository;
+import org.example.repo.UserRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 //@EnableCaching

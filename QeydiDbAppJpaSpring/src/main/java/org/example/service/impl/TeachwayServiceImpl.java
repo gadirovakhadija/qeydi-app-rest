@@ -1,6 +1,6 @@
 package org.example.service.impl;
 
-import org.example.dao.TeachwayRepository;
+import org.example.repo.TeachwayRepository;
 import org.example.entity.Teachway;
 import org.example.service.inter.TeachwayServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;

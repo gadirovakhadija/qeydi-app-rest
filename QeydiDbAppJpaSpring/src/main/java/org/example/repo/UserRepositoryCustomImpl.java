@@ -1,4 +1,4 @@
-package org.example.dao;
+package org.example.repo;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

@@ -1,8 +1,8 @@
 package org.example.service.impl;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import org.example.dao.UserRepository;
-import org.example.dao.UserRepositoryCustom;
+import org.example.repo.UserRepository;
+import org.example.repo.UserRepositoryCustom;
 import org.example.entity.User;
 import org.example.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;

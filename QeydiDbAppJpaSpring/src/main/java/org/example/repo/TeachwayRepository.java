@@ -1,14 +1,11 @@
-package org.example.dao;
+package org.example.repo;
 
-import org.example.dao.impl.TeachwayRepositoryCustom;
 import org.example.entity.Teachway;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface TeachwayRepository extends JpaRepository<Teachway, Long>, TeachwayRepositoryCustom {
+public interface TeachwayRepository extends JpaRepository<Teachway, Long> {
 
     Teachway findById(int id);
 

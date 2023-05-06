@@ -1,6 +1,6 @@
 package org.example.service.impl;
 
-import org.example.dao.SubjectRepository;
+import org.example.repo.SubjectRepository;
 import org.example.entity.Subject;
 import org.example.service.inter.SubjectServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;

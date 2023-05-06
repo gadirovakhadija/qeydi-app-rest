@@ -1,6 +1,5 @@
 package org.example.service;
 
-import org.example.dao.UserRepository;
 import org.example.entity.User;
 import org.example.security.JwtUserDetails;
 import org.example.service.inter.UserServiceInter;
