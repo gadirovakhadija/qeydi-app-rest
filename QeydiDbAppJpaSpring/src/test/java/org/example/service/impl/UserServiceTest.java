@@ -1,56 +1,79 @@
 package org.example.service.impl;
 
 import org.example.entity.User;
+import org.example.repo.UserRepository;
 import org.example.repo.UserRepositoryCustom;
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-class UserServiceTest {
+
+@RunWith(MockitoJUnitRunner.class)
+public class UserServiceTest {
 
     @Mock
-    public UserRepositoryCustom userRepoCust;
+    public UserRepository userRepository;
+
+    @Mock
+    UserRepositoryCustom userRepositoryCustom;
 
     @InjectMocks
     public UserServiceImpl userService;
 
-    @BeforeClass
-    public static void setUp(){
-        System.out.println("setup called");
-    }
-
     @Before
-    public void init() {
-        MockitoAnnotations.openMocks(this);
-    }
+    public void beforeClass() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        int id = 1;
+        String name = "test";
+        String surname = "test";
+        String email = "test@example.com";
 
-    @Before
-    public void before() {
-        System.out.println("before isledi");
+        User u = new User(name,surname,email);
+        User user = new User(email);
+        User us = new User(id);
+        List<User> userList = new LinkedList<>();
+        userList.add(u);
+
+        when(userRepository.findByEmail(email)).thenReturn(user);
+        when(userRepository.findById(1)).thenReturn(us);
+        when(userRepositoryCustom.getAll(null,null,null)).thenReturn(userList);
     }
 
     @Test
-    public void testGivenNullThenGetAll() {
-        List<User> list = new ArrayList<>();
-        User u = new User();
-        u.setName("Khadija");
-        u.setSurname("GAdirova");
-        u.setEmail("khady@gmail.com");
-        list.add(u);
-        Mockito.when(userRepoCust.getAll(null,null,null)).thenReturn(list);
-        System.out.println("Testin icerisi");
-        List<User> list2 = userService.getAll(null, null,null);
-//        assertEquals(1, list.size(),"user size must be 1");
-        Assert.assertEquals("user size must be 1",1, list2.size());
+    public void  whenGivenNullReturnAllUsers(){
+
+        List<User> list = userService.getAll(null,null,null);
+
+        assertEquals("Not true return",1,list.size());
+
+
     }
+    @Test
+    public void testFindById() {
+
+        User result = userService.findById(1);
+
+        assertEquals("Result is false",1, result.getId());
+    }
+
+    @Test
+    public void testFindByEmail() {
+
+        User result = userService.findByEmail("test@example.com");
+
+        assertEquals("Email doesn't correct","test@example.com", result.getEmail());
+    }
+
 
 }

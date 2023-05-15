@@ -72,13 +72,22 @@ public class User {
     public User(int id) {
         this.id = id;
     }
+    public User(String email){
+        this.email=email;
+    }
 
     public User(int id, String password) {
         this.id = id;
         this.password = password;
     }
 
-    public User(int id,String name, String surname, String email, String password) {
+    public User(String name, String surname, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
+
+    public User(int id, String name, String surname, String email, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
